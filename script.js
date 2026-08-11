@@ -1,22 +1,32 @@
+/* =========================================================
+   Nobodywhois0 — Variante B · Editorial minimalista
+   Vanilla JS, cero dependencias. Animación mínima y sobria.
+   ========================================================= */
+
+/* ---------- Mobile nav ---------- */
 const navToggle = document.getElementById("navToggle");
 const nav = document.getElementById("nav");
 
 navToggle.addEventListener("click", () => {
   const isOpen = nav.classList.toggle("open");
-  navToggle.setAttribute("aria-expanded", isOpen);
+  navToggle.classList.toggle("open", isOpen);
+  navToggle.setAttribute("aria-expanded", String(isOpen));
 });
-
-nav.querySelectorAll("a").forEach((link) => {
+nav.querySelectorAll("a").forEach((link) =>
   link.addEventListener("click", () => {
     nav.classList.remove("open");
+    navToggle.classList.remove("open");
     navToggle.setAttribute("aria-expanded", "false");
-  });
-});
+  })
+);
 
-document.querySelectorAll(".about, .projects, .contact").forEach((section) => {
-  section.classList.add("reveal");
-});
+/* ---------- Header hairline on scroll ---------- */
+const header = document.querySelector(".site-header");
+const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 12);
+onScroll();
+window.addEventListener("scroll", onScroll, { passive: true });
 
+/* ---------- Scroll reveal (fade-up sobrio) ---------- */
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -26,7 +36,6 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.15 }
+  { threshold: 0.14, rootMargin: "0px 0px -40px 0px" }
 );
-
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));

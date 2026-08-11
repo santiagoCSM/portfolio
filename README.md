@@ -1,6 +1,6 @@
 # Nobodywhois0 — Portfolio
 
-Personal developer portfolio. Dark theme, dotted grain background, lime accent, built with plain HTML, CSS and JavaScript — no frameworks, no build step.
+Portfolio for the Nobodywhois0 web studio. Warm dark theme, editorial serif typography, lime accent — built with plain HTML, CSS and JavaScript, with no frameworks and no build step.
 
 **Live site:** https://nobodywhois0.github.io/portfolio/
 
@@ -12,14 +12,14 @@ Read this in [English](#english) or [Español](#español).
 
 ### About
 
-A single-page portfolio with four sections: Hero, About, Projects, and Contact. Includes a mobile nav menu, scroll-reveal animations, and a floating WhatsApp button.
+A single-page portfolio with four sections: Hero, Profile, Selected Work, and Contact. Includes a mobile nav menu, subtle scroll-reveal animations, and a project grid with real screenshots.
 
 ### Tech stack
 
 - HTML5
 - CSS3 (custom properties, no preprocessor)
 - Vanilla JavaScript (no dependencies)
-- Fonts: [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) & [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) via Google Fonts
+- Fonts: [Fraunces](https://fonts.google.com/specimen/Fraunces), [Inter](https://fonts.google.com/specimen/Inter) & [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) via Google Fonts
 
 ### Project structure
 
@@ -27,7 +27,8 @@ A single-page portfolio with four sections: Hero, About, Projects, and Contact. 
 .
 ├── index.html    # Markup and content
 ├── styles.css    # Theme, layout, animations
-└── script.js     # Mobile menu + scroll-reveal
+├── script.js     # Mobile menu + scroll-reveal
+└── img/          # Project screenshots
 ```
 
 ### Running locally
@@ -54,14 +55,14 @@ Personal project — feel free to browse the code for reference, but please don'
 
 ### Sobre el proyecto
 
-Un portafolio de una sola página con cuatro secciones: Hero, Sobre mí, Proyectos y Contacto. Incluye menú de navegación móvil, animaciones al hacer scroll y un botón flotante de WhatsApp.
+Un portafolio de una sola página con cuatro secciones: Hero, Perfil, Trabajo y Contacto. Incluye menú de navegación móvil, animaciones sutiles al hacer scroll y una galería de proyectos con capturas reales.
 
 ### Tecnologías
 
 - HTML5
 - CSS3 (variables personalizadas, sin preprocesador)
 - JavaScript puro (sin dependencias)
-- Fuentes: [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) y [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) vía Google Fonts
+- Fuentes: [Fraunces](https://fonts.google.com/specimen/Fraunces), [Inter](https://fonts.google.com/specimen/Inter) y [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) vía Google Fonts
 
 ### Estructura del proyecto
 
@@ -69,7 +70,8 @@ Un portafolio de una sola página con cuatro secciones: Hero, Sobre mí, Proyect
 .
 ├── index.html    # Estructura y contenido
 ├── styles.css    # Tema, layout y animaciones
-└── script.js     # Menú móvil + animaciones al hacer scroll
+├── script.js     # Menú móvil + animaciones al hacer scroll
+└── img/          # Capturas de los proyectos
 ```
 
 ### Cómo correrlo localmente
