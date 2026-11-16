@@ -1,5 +1,5 @@
 /* =========================================================
-   Nobodywhois0 — Variante B · Editorial minimalista
+   Portafolio personal · JavaScript
    Vanilla JS, cero dependencias. Animación mínima y sobria.
    ========================================================= */
 

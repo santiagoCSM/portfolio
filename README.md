@@ -1,10 +1,10 @@
-# Nobodywhois0 — Portfolio
+# Santiago C. — Portafolio
 
-Portfolio for the Nobodywhois0 web studio. Warm dark theme, editorial serif typography, lime accent — built with plain HTML, CSS and JavaScript, with no frameworks and no build step.
+Portafolio personal de desarrollo web. Tema oscuro cálido, tipografía editorial y acento lima; creado con HTML, CSS y JavaScript, sin frameworks ni pasos de compilación.
 
-**Live site:** https://nobodywhois0.github.io/portfolio/
+**Sitio:** https://santiagoCSM.github.io/portfolio/
 
-Read this in [English](#english) or [Español](#español).
+Lee este documento en [inglés](#english) o [español](#español).
 
 ---
 
@@ -12,7 +12,7 @@ Read this in [English](#english) or [Español](#español).
 
 ### About
 
-A single-page portfolio with four sections: Hero, Profile, Selected Work, and Contact. Includes a mobile nav menu, subtle scroll-reveal animations, and a project grid with real screenshots.
+A single-page personal portfolio with four sections: Hero, Profile, Selected Work, and Contact. Includes a mobile nav menu, subtle scroll-reveal animations, and a project grid with real screenshots.
 
 ### Tech stack
 
@@ -55,7 +55,7 @@ Personal project — feel free to browse the code for reference, but please don'
 
 ### Sobre el proyecto
 
-Un portafolio de una sola página con cuatro secciones: Hero, Perfil, Trabajo y Contacto. Incluye menú de navegación móvil, animaciones sutiles al hacer scroll y una galería de proyectos con capturas reales.
+Un portafolio personal de una sola página con cuatro secciones: Inicio, Perfil, Trabajo y Contacto. Incluye menú de navegación móvil, animaciones sutiles al hacer scroll y una galería de proyectos con capturas reales.
 
 ### Tecnologías
 
@@ -86,8 +86,8 @@ Luego abre `http://localhost:4173` en tu navegador.
 
 ### Despliegue
 
-Se despliega automáticamente con **GitHub Pages** desde la rama `main`, directorio raíz. Cada push a `main` actualiza el sitio en producción.
+Se despliega automáticamente con **GitHub Pages** desde la rama `main`, directorio raíz. Cada push a `main` actualiza el sitio.
 
 ### Licencia
 
-Proyecto personal — siéntete libre de revisar el código como referencia, pero por favor no lo publiques como propio.
+Proyecto personal — puedes revisar el código como referencia, pero por favor no lo publiques como propio.
