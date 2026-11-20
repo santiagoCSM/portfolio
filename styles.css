@@ -130,7 +130,8 @@ section {
 
 /* ---------- Hero ---------- */
 .hero {
-  padding-top: 0;
+  /* Header fijo superpuesto: main sigue iniciando en y=0. */
+  padding-top: clamp(100px, 12vh, 140px);
   padding-bottom: clamp(60px, 12vh, 120px);
 }
 .eyebrow {
