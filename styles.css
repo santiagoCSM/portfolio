@@ -379,6 +379,30 @@ section {
   line-height: 1.5;
 }
 .work-card a:focus-visible .work-name { color: var(--accent); }
+.work-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 16px;
+  padding: 0 2px;
+}
+.work-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: max-content;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 3px;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.work-actions a:hover,
+.work-actions a:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
 
 
 /* ---------- Contact ---------- */
