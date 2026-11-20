@@ -223,8 +223,6 @@ section {
 .about-body p { color: var(--muted); font-size: 1.05rem; }
 
 .stack { width: 100%; margin: 0 0 54px; }
-.stack-marquee { display: block; }
-.stack-track { animation-duration: 28s; }
 .stack-label {
   font-family: var(--font-mono);
   font-size: 0.76rem;
@@ -244,10 +242,10 @@ section {
 .stack-track {
   display: flex;
   width: max-content;
-  animation: stack-scroll 38s linear infinite;
+  animation: stack-scroll 28s linear infinite;
   will-change: transform;
 }
-.stack-marquee:hover .stack-track { animation-play-state: paused; }
+
 .stack-list {
   list-style: none;
   display: flex;
