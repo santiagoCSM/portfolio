@@ -391,6 +391,8 @@ section {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 800px) {
+  /* El header es fijo: en móvil se deja espacio para su altura y un margen visual. */
+  .hero { padding-top: calc(74px + 24px); }
   .about-grid { grid-template-columns: 1fr; }
   .process { grid-template-columns: 1fr; }
   .work-grid { grid-template-columns: 1fr; }
