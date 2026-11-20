@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://santiagocsm.github.io/portfolio/sitemap.xml
