@@ -270,12 +270,8 @@ section {
 @keyframes stack-scroll {
   to { transform: translateX(-50%); }
 }
-@media (prefers-reduced-motion: reduce) {
-  .stack-marquee { overflow: visible; -webkit-mask-image: none; mask-image: none; }
-  .stack-track { width: auto; animation: none; }
-  .stack-list { flex-wrap: wrap; padding-right: 0; }
-  .stack-list[aria-hidden="true"] { display: none; }
-}
+/* El desplazamiento de herramientas permanece activo por petición expresa;
+   el resto de animaciones sigue respetando el movimiento reducido. */
 
 .process {
   list-style: none;
@@ -537,6 +533,7 @@ section {
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+  .stack-track { animation: stack-scroll 28s linear infinite !important; }
   .js .reveal { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }
