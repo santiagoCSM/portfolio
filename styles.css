@@ -130,7 +130,7 @@ section {
 
 /* ---------- Hero ---------- */
 .hero {
-  padding-top: clamp(80px, 16vh, 170px);
+  padding-top: 0;
   padding-bottom: clamp(60px, 12vh, 120px);
 }
 .eyebrow {
