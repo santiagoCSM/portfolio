@@ -397,9 +397,16 @@ section {
   .contact-link { flex-direction: column; gap: 6px; }
 
   .nav {
-    position: fixed;
-    inset: 0 0 0 auto;
+    /* Anclado al borde inferior del header, sin depender del
+       comportamiento de position: fixed dentro de backdrop-filter. */
+    position: absolute;
+    top: 100%;
+    right: 0;
+    bottom: auto;
     width: min(76vw, 300px);
+    height: calc(100vh - 72px);
+    height: calc(100dvh - 72px);
+    overflow-y: auto;
     flex-direction: column;
     justify-content: center;
     gap: 28px;
@@ -407,9 +414,15 @@ section {
     background: var(--bg-soft);
     border-left: 1px solid var(--line);
     transform: translateX(100%);
-    transition: transform 0.4s var(--ease);
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.4s var(--ease), visibility 0.4s;
   }
-  .nav.open { transform: translateX(0); }
+  .nav.open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
   .nav a { font-size: 1.15rem; }
   .nav-toggle { display: flex; z-index: 51; }
   .nav-toggle.open span:nth-child(1) { transform: translateY(4px) rotate(45deg); }
