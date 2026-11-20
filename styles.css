@@ -211,7 +211,7 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(30px, 6vw, 64px);
-  margin-bottom: 70px;
+  margin-bottom: 42px;
 }
 .lead {
   font-family: var(--font-serif);
@@ -222,7 +222,9 @@ section {
 }
 .about-body p { color: var(--muted); font-size: 1.05rem; }
 
-.stack { margin-top: 34px; }
+.stack { width: 100%; margin: 0 0 54px; }
+.stack-marquee { display: block; }
+.stack-track { animation-duration: 28s; }
 .stack-label {
   font-family: var(--font-mono);
   font-size: 0.76rem;
