@@ -173,3 +173,54 @@ if (archScene) {
     resume();
   }
 }
+
+/* ---------- Previews de proyectos: reproducir solo al interactuar ---------- */
+const previewHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+const previewReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+document.querySelectorAll(".work-shot[data-video-preview]").forEach((shot) => {
+  const video = shot.querySelector("video");
+  const link = shot.closest("a");
+  if (!video || !link) return;
+
+  let interacting = false;
+
+  const stopPreview = () => {
+    interacting = false;
+    shot.classList.remove("is-video-playing");
+    video.pause();
+    if (video.readyState > 0) video.currentTime = 0;
+  };
+
+  const startPreview = () => {
+    if (!previewHover.matches || previewReducedMotion.matches) return;
+    interacting = true;
+    const playback = video.play();
+    if (playback && typeof playback.catch === "function") {
+      playback.catch(() => {
+        shot.classList.remove("is-video-playing");
+      });
+    }
+  };
+
+  // El video solo reemplaza a la imagen cuando realmente está reproduciéndose.
+  video.addEventListener("playing", () => {
+    if (interacting) shot.classList.add("is-video-playing");
+  });
+  video.addEventListener("error", stopPreview);
+  link.addEventListener("mouseenter", startPreview);
+  link.addEventListener("mouseleave", stopPreview);
+  link.addEventListener("focusin", startPreview);
+  link.addEventListener("focusout", (event) => {
+    if (!link.contains(event.relatedTarget)) stopPreview();
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stopPreview();
+  });
+  previewHover.addEventListener("change", () => {
+    if (!previewHover.matches) stopPreview();
+  });
+  previewReducedMotion.addEventListener("change", () => {
+    if (previewReducedMotion.matches) stopPreview();
+  });
+});
