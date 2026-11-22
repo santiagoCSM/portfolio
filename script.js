@@ -173,7 +173,8 @@ if (archScene) {
   }
 }
 
-/* ---------- Previews de proyectos: reproducir solo al interactuar ---------- */
+/* ---------- Vistas previas de proyectos ---------- */
+const previewMobile = window.matchMedia("(hover: none), (pointer: coarse)");
 const previewHover = window.matchMedia("(hover: hover) and (pointer: fine)");
 const previewReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -182,44 +183,73 @@ document.querySelectorAll(".work-shot[data-video-preview]").forEach((shot) => {
   const link = shot.closest("a");
   if (!video || !link) return;
 
-  let interacting = false;
+  let visibleOnScreen = false;
+  let hoverActive = false;
 
-  const stopPreview = () => {
-    interacting = false;
+  const resetPreview = () => {
     shot.classList.remove("is-video-playing");
     video.pause();
-    if (video.readyState > 0) video.currentTime = 0;
+    if (video.readyState > 0 && video.currentTime !== 0) video.currentTime = 0;
   };
 
-  const startPreview = () => {
-    if (!previewHover.matches || previewReducedMotion.matches) return;
-    interacting = true;
+  const playPreview = () => {
+    if (document.hidden || previewReducedMotion.matches) return;
+    video.loop = false;
     const playback = video.play();
     if (playback && typeof playback.catch === "function") {
-      playback.catch(() => {
-        shot.classList.remove("is-video-playing");
-      });
+      playback.catch(() => shot.classList.remove("is-video-playing"));
     }
   };
 
-  // El video solo reemplaza a la imagen cuando realmente está reproduciéndose.
   video.addEventListener("playing", () => {
-    if (interacting) shot.classList.add("is-video-playing");
+    if ((previewMobile.matches && visibleOnScreen) ||
+        (!previewMobile.matches && hoverActive)) {
+      shot.classList.add("is-video-playing");
+    } else {
+      video.pause();
+    }
   });
-  video.addEventListener("error", stopPreview);
-  link.addEventListener("mouseenter", startPreview);
-  link.addEventListener("mouseleave", stopPreview);
-  link.addEventListener("focusin", startPreview);
+  video.addEventListener("error", resetPreview);
+
+  const enterHover = () => {
+    if (previewMobile.matches || !previewHover.matches || hoverActive) return;
+    hoverActive = true;
+    playPreview();
+  };
+  const leaveHover = () => {
+    hoverActive = false;
+    if (!previewMobile.matches) resetPreview();
+  };
+
+  link.addEventListener("mouseenter", enterHover);
+  link.addEventListener("mouseleave", leaveHover);
+  link.addEventListener("focusin", enterHover);
   link.addEventListener("focusout", (event) => {
-    if (!link.contains(event.relatedTarget)) stopPreview();
+    if (!link.contains(event.relatedTarget)) leaveHover();
   });
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(([entry]) => {
+      const visible = entry.isIntersecting && entry.intersectionRatio >= 0.6;
+      if (visible === visibleOnScreen) return;
+
+      visibleOnScreen = visible;
+      if (!previewMobile.matches) return;
+      if (visible) playPreview();
+      else resetPreview();
+    }, { threshold: [0, 0.6, 1] });
+    observer.observe(shot);
+  }
+
+  const syncPreview = () => {
+    hoverActive = false;
+    resetPreview();
+    if (previewMobile.matches && visibleOnScreen) playPreview();
+  };
+  previewMobile.addEventListener("change", syncPreview);
+  previewReducedMotion.addEventListener("change", syncPreview);
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden) stopPreview();
-  });
-  previewHover.addEventListener("change", () => {
-    if (!previewHover.matches) stopPreview();
-  });
-  previewReducedMotion.addEventListener("change", () => {
-    if (previewReducedMotion.matches) stopPreview();
+    if (document.hidden) resetPreview();
+    else if (previewMobile.matches && visibleOnScreen) playPreview();
   });
 });
