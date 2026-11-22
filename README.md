@@ -1,6 +1,6 @@
 # Santiago C. — Portafolio
 
-Portafolio personal de desarrollo web. Tema oscuro cálido, tipografía editorial y acento lima; creado con HTML, CSS y JavaScript, sin frameworks ni pasos de compilación.
+Portafolio personal de desarrollo web. Tema oscuro cálido, tipografía editorial y acento turquesa surf; creado con HTML, CSS y JavaScript, sin frameworks ni pasos de compilación.
 
 **Sitio:** https://santiagoCSM.github.io/portfolio/
 
@@ -12,7 +12,7 @@ Lee este documento en [inglés](#english) o [español](#español).
 
 ### About
 
-A single-page personal portfolio with four sections: Hero, Profile, Selected Work, and Contact. Includes a mobile nav menu, subtle scroll-reveal animations, and a project grid with real screenshots.
+A single-page personal portfolio with four sections: Hero, Profile, Selected Work, and Contact. Includes a mobile nav menu, subtle scroll-reveal animations, and a project grid with project screenshots and a video preview.
 
 ### Tech stack
 
@@ -27,8 +27,10 @@ A single-page personal portfolio with four sections: Hero, Profile, Selected Wor
 .
 ├── index.html    # Markup and content
 ├── styles.css    # Theme, layout, animations
-├── script.js     # Mobile menu + scroll-reveal
-└── img/          # Project screenshots
+├── script.js             # Navigation and interactions
+├── hero-architecture.css # Cover animation
+├── img/                  # Project screenshots
+└── videos/               # Project previews
 ```
 
 ### Running locally
@@ -55,7 +57,7 @@ Personal project — feel free to browse the code for reference, but please don'
 
 ### Sobre el proyecto
 
-Un portafolio personal de una sola página con cuatro secciones: Inicio, Perfil, Trabajo y Contacto. Incluye menú de navegación móvil, animaciones sutiles al hacer scroll y una galería de proyectos con capturas reales.
+Un portafolio personal de una sola página con cuatro secciones: Inicio, Perfil, Trabajo y Contacto. Incluye menú de navegación móvil, animaciones sutiles al hacer scroll y una galería de proyectos con capturas y vista previa en video.
 
 ### Tecnologías
 
@@ -70,8 +72,10 @@ Un portafolio personal de una sola página con cuatro secciones: Inicio, Perfil,
 .
 ├── index.html    # Estructura y contenido
 ├── styles.css    # Tema, layout y animaciones
-├── script.js     # Menú móvil + animaciones al hacer scroll
-└── img/          # Capturas de los proyectos
+├── script.js             # Navegación e interacciones
+├── hero-architecture.css # Animación de portada
+├── img/                  # Capturas de proyectos
+└── videos/               # Videos de proyectos
 ```
 
 ### Cómo correrlo localmente
