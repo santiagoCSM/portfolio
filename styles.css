@@ -1,19 +1,19 @@
 /* =========================================================
-   Nobodywhois0 — Variante B · Editorial minimalista
-   Vanilla CSS. Dark cálido + acento lima, la tipografía manda.
+   Portafolio — Paleta marfil antiguo / negro piano / turquesa surf
+   Vanilla CSS. Contraste editorial con acentos de turquesa surf.
    ========================================================= */
 
 :root {
-  --bg:      #0d0d0b;   /* near-black cálido (papel oscuro) */
-  --bg-soft: #131310;
-  --text:    #ecebe3;   /* off-white cálido */
-  --muted:   #9d9a8e;
-  --faint:   #6f6c62;
-  --line:    rgba(236, 235, 227, 0.12);
-  --line-soft: rgba(236, 235, 227, 0.06);
+  --bg:      #0A0A0B;   /* negro piano */
+  --bg-soft: #151718;
+  --text:    #EFE4CE;   /* marfil antiguo */
+  --muted:   #B7AD99;
+  --faint:   #8A8377;
+  --line:    rgba(239, 228, 206, 0.16);
+  --line-soft: rgba(239, 228, 206, 0.08);
 
-  --accent:  #c7e04f;   /* lima refinado, más suave */
-  --accent-strong: #d7f15a;
+  --accent:  #36C9BE;   /* turquesa surf */
+  --accent-strong: #62E1D5;
 
   --font-serif: "Fraunces", Georgia, serif;
   --font-body:  "Inter", system-ui, sans-serif;
@@ -69,7 +69,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   justify-content: space-between;
   padding: 22px clamp(20px, 6vw, 60px);
-  background: rgba(13, 13, 11, 0.8);
+  background: rgba(10, 10, 11, 0.84);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
   transition: border-color 0.3s ease;
@@ -334,10 +334,10 @@ section {
   position: absolute;
   inset: 0;
   border-radius: 10px;
-  box-shadow: inset 0 0 0 1px rgba(236,235,227,0.04);
+  box-shadow: inset 0 0 0 1px rgba(239,228,206,0.055);
   transition: box-shadow 0.35s ease;
 }
-.work-card a:hover .work-shot::after { box-shadow: inset 0 0 0 1px rgba(199,224,79,0.4); }
+.work-card a:hover .work-shot::after { box-shadow: inset 0 0 0 1px rgba(54,201,190,0.46); }
 
 .work-meta { display: block; padding: 18px 2px 0; }
 .work-top {
