@@ -99,49 +99,45 @@ if (archScene) {
   if (pairs.length === 4) {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
-    let lastUpdate = 0;
     let isVisible = true;
 
     const alignNotes = () => {
       const sceneRect = archScene.getBoundingClientRect();
       if (!sceneRect.width || !sceneRect.height) return;
 
-      // Todas las lecturas geométricas se hacen antes de escribir estilos.
+      // Primero medimos todo; después escribimos únicamente transformaciones.
+      // Así no forzamos un recálculo del layout en cada fotograma.
       const positions = pairs.map(({ plate, note, side }) => {
         const plateRect = plate.getBoundingClientRect();
         const noteHeight = note.offsetHeight;
+        const noteX = sceneRect.left + note.offsetLeft;
+        const noteWidth = note.offsetWidth;
         const centerY = (plateRect.top + plateRect.bottom) / 2 - sceneRect.top;
-        return {
-          note, side, plateRect,
-          y: Math.max(0, Math.min(sceneRect.height - noteHeight, centerY - noteHeight / 2)),
-        };
+        const y = Math.max(0, Math.min(sceneRect.height - noteHeight, centerY - noteHeight / 2));
+        const gap = side === "left"
+          ? plateRect.left - (noteX + noteWidth) - 7
+          : noteX - plateRect.right - 7;
+        return { note, translateY: y - note.offsetTop, leader: Math.max(8, Math.min(155, gap)) };
       });
 
-      positions.forEach(({ note, y }) => { note.style.top = `${y.toFixed(2)}px`; });
-
-      // La línea termina en el borde visible de su capa, sin punto decorativo.
-      positions.forEach(({ note, side, plateRect }) => {
-        const noteRect = note.getBoundingClientRect();
-        const gap = side === "left"
-          ? plateRect.left - noteRect.right - 7
-          : noteRect.left - plateRect.right - 7;
-        note.style.setProperty("--leader-length", `${Math.max(8, Math.min(155, gap)).toFixed(2)}px`);
+      positions.forEach(({ note, translateY, leader }) => {
+        // Las transformaciones son compositadas por el navegador y evitan
+        // mover el elemento con 'top', que repinta/recalcula el diseño.
+        note.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0)`;
+        note.style.setProperty("--leader-length", `${leader.toFixed(2)}px`);
       });
     };
 
-    const tick = (time) => {
+    const tick = () => {
       frame = 0;
       if (!isVisible || document.hidden) return;
-      if (!lastUpdate || time - lastUpdate >= 33) {
-        alignNotes();
-        lastUpdate = time;
-      }
+      // Sin límite artificial de 33 ms: se sincroniza con cada repintado.
+      alignNotes();
       if (!reducedMotion.matches) frame = requestAnimationFrame(tick);
     };
 
     const resume = () => {
       if (!isVisible || document.hidden || frame) return;
-      lastUpdate = 0;
       frame = requestAnimationFrame(tick);
     };
 
