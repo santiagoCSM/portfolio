@@ -77,3 +77,94 @@ if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-mot
   document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
   document.documentElement.classList.add("js");
 }
+
+
+/* ---------- Notas que siguen las capas reales de la vista 3D ---------- */
+/* Leemos la caja proyectada de cada capa: así la etiqueta conserva su
+   altura correcta aunque la maqueta flote, gire o cambie de tamaño. */
+const archScene = document.querySelector(".arch-scene");
+
+if (archScene) {
+  const pairs = [
+    [".arch-plate--ui", ".arch-note--interface", "right"],
+    [".arch-plate--layout", ".arch-note--components", "left"],
+    [".arch-plate--logic", ".arch-note--logic", "right"],
+    [".arch-plate--data", ".arch-note--data", "left"],
+  ].map(([plateSelector, noteSelector, side]) => ({
+    plate: archScene.querySelector(plateSelector),
+    note: archScene.querySelector(noteSelector),
+    side,
+  })).filter(({ plate, note }) => plate && note);
+
+  if (pairs.length === 4) {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+    let lastUpdate = 0;
+    let isVisible = true;
+
+    const alignNotes = () => {
+      const sceneRect = archScene.getBoundingClientRect();
+      if (!sceneRect.width || !sceneRect.height) return;
+
+      // Todas las lecturas geométricas se hacen antes de escribir estilos.
+      const positions = pairs.map(({ plate, note, side }) => {
+        const plateRect = plate.getBoundingClientRect();
+        const noteHeight = note.offsetHeight;
+        const centerY = (plateRect.top + plateRect.bottom) / 2 - sceneRect.top;
+        return {
+          note, side, plateRect,
+          y: Math.max(0, Math.min(sceneRect.height - noteHeight, centerY - noteHeight / 2)),
+        };
+      });
+
+      positions.forEach(({ note, y }) => { note.style.top = `${y.toFixed(2)}px`; });
+
+      // La línea termina en el borde visible de su capa, sin punto decorativo.
+      positions.forEach(({ note, side, plateRect }) => {
+        const noteRect = note.getBoundingClientRect();
+        const gap = side === "left"
+          ? plateRect.left - noteRect.right - 7
+          : noteRect.left - plateRect.right - 7;
+        note.style.setProperty("--leader-length", `${Math.max(8, Math.min(155, gap)).toFixed(2)}px`);
+      });
+    };
+
+    const tick = (time) => {
+      frame = 0;
+      if (!isVisible || document.hidden) return;
+      if (!lastUpdate || time - lastUpdate >= 33) {
+        alignNotes();
+        lastUpdate = time;
+      }
+      if (!reducedMotion.matches) frame = requestAnimationFrame(tick);
+    };
+
+    const resume = () => {
+      if (!isVisible || document.hidden || frame) return;
+      lastUpdate = 0;
+      frame = requestAnimationFrame(tick);
+    };
+
+    const stop = () => {
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+    };
+
+    if ("IntersectionObserver" in window) {
+      const watcher = new IntersectionObserver(([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) resume();
+        else stop();
+      }, { threshold: 0 });
+      watcher.observe(archScene);
+    }
+
+    window.addEventListener("resize", resume, { passive: true });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stop();
+      else resume();
+    });
+    reducedMotion.addEventListener("change", resume);
+    resume();
+  }
+}
