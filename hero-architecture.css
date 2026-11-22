@@ -262,7 +262,7 @@
 .arch-note--left::before { left: calc(100% + 7px); }
 .arch-note--right::before { right: calc(100% + 7px); }
 .arch-note span { font-size: 10px; color: var(--accent); }
-.arch-note strong { font-weight: 500; color: var(--text); font-size: 11px; }
+.arch-note strong { font-weight: 500; color: var(--text); font-size: 16px; }
 .arch-note small { color: var(--muted); font-size: 9px; line-height: 1.5; }
 .arch-note--interface { top: 18%; right: 0; }
 .arch-note--components { top: 39%; left: 0; }
