@@ -313,6 +313,8 @@ section {
 .process-step p { color: var(--muted); font-size: 0.92rem; }
 
 /* ---------- Projects (tarjetas con captura) ---------- */
+/* Más espacio para las capturas panorámicas sin afectar Perfil ni Contacto. */
+.projects { max-width: 1200px; }
 .work-grid {
   list-style: none;
   display: grid;
@@ -327,7 +329,7 @@ section {
   border-radius: 10px;
   overflow: hidden;
   background: var(--bg-soft);
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 21 / 10;
   box-shadow: none;
   transition: box-shadow 0.4s ease;
 }
