@@ -1,20 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#0d0d0b"/>
-  <g fill="none" stroke="#9d9a8e" stroke-width="1.2">
+  <rect width="1200" height="630" fill="#0A0A0B"/>
+  <g fill="none" stroke="#B7AD99" stroke-width="1.2">
     <path d="M68 96 H978" opacity=".65"/>
     <path d="M68 492 H1132" opacity=".6"/>
   </g>
   <g font-family="Arial,Helvetica,sans-serif">
-    <text x="68" y="86" fill="#9d9a8e" font-size="23" font-weight="500" letter-spacing="9">PORTAFOLIO</text>
-    <text x="1064" y="85" fill="#c7e04f" font-size="54" font-weight="400" letter-spacing="-5">&lt;/&gt;</text>
+    <text x="68" y="86" fill="#B7AD99" font-size="23" font-weight="500" letter-spacing="9">PORTAFOLIO</text>
+    <text x="1064" y="85" fill="#36C9BE" font-size="54" font-weight="400" letter-spacing="-5">&lt;/&gt;</text>
   </g>
   <g font-family="Georgia,'DejaVu Serif',serif">
-    <text x="67" y="284" fill="#ecebe3" font-size="84" letter-spacing="-2">Santiago Cortés</text>
+    <text x="67" y="284" fill="#EFE4CE" font-size="84" letter-spacing="-2">Santiago Cortés</text>
   </g>
   <g font-family="Arial,Helvetica,sans-serif">
-    <text x="70" y="356" fill="#c7e04f" font-size="40" font-weight="500">Desarrollador Full-Stack y Backend</text>
-    <text x="70" y="416" fill="#9d9a8e" font-size="27" letter-spacing="1">Software · APIs · Ciberseguridad</text>
-    <text x="70" y="553" fill="#c7e04f" font-size="39">↗</text>
-    <text x="116" y="549" fill="#ecebe3" font-size="25" letter-spacing=".5">santiagocsm.github.io/portfolio</text>
+    <text x="70" y="356" fill="#36C9BE" font-size="40" font-weight="500">Desarrollador Full-Stack y Backend</text>
+    <text x="70" y="416" fill="#B7AD99" font-size="27" letter-spacing="1">Software · APIs · Ciberseguridad</text>
+    <text x="70" y="553" fill="#36C9BE" font-size="39">↗</text>
+    <text x="116" y="549" fill="#EFE4CE" font-size="25" letter-spacing=".5">santiagocsm.github.io/portfolio</text>
   </g>
 </svg>
