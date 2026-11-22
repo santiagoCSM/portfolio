@@ -228,7 +228,19 @@
     margin: 38px auto 0;
   }
   .arch-assembly { width: 310px; height: 248px; }
-  .arch-note { width: 122px; }
+  /* En tablet solo se muestran los nombres; las notas no rozan los bordes. */
+  .arch-note {
+    width: 108px;
+    gap: 0;
+  }
+  .arch-note > span,
+  .arch-note > small { display: none; }
+  .arch-note strong {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .arch-note--left { left: 28px; }
+  .arch-note--right { right: 28px; }
 }
 
 /* Tablet compacta y móvil grande: escenario casi a pantalla completa
@@ -243,21 +255,19 @@
     line-height: 1.08;
   }
   .hero-architecture {
-    width: calc(100vw - 32px);
+    width: 100%;
     max-width: 760px;
     height: 500px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 24px 0 0;
+    margin: 24px auto 0;
   }
   .arch-assembly {
     width: clamp(235px, 39vw, 296px);
     height: clamp(190px, 32vw, 242px);
   }
-  .arch-note { width: clamp(98px, 15vw, 118px); }
-  .arch-note span { font-size: 10px; }
+  .arch-note { width: clamp(82px, 12vw, 104px); }
+  .arch-note--left { left: 20px; }
+  .arch-note--right { right: 20px; }
   .arch-note strong { font-size: 11px; }
-  .arch-note small { font-size: 9px; }
 }
 
 /* Teléfonos grandes, incluidos 540–680px: espacio más generoso para
@@ -266,7 +276,7 @@
   .hero-copy .hero-title { font-size: clamp(2.55rem, 8vw, 3.75rem); }
   .hero-copy .hero-lede { font-size: 1.04rem; }
   .hero-architecture {
-    width: calc(100vw - 16px);
+    width: 100%;
     height: 460px;
     margin-top: 16px;
   }
@@ -275,31 +285,31 @@
     height: clamp(166px, 33vw, 210px);
   }
   .arch-note {
-    width: clamp(90px, 17vw, 112px);
-    gap: 2px;
+    width: clamp(76px, 15vw, 96px);
+    gap: 0;
   }
-  .arch-note span { font-size: 9.5px; }
+  .arch-note--left { left: 14px; }
+  .arch-note--right { right: 14px; }
   .arch-note strong { font-size: 10px; }
-  .arch-note small { font-size: 8.5px; }
 }
 
 /* Teléfonos pequeños: conservar la composición sin desbordamiento lateral. */
 @media (max-width: 520px) {
   .hero-architecture {
     height: 400px;
-    width: calc(100vw - 12px);
+    width: 100%;
   }
   .arch-assembly {
     width: clamp(160px, 48vw, 205px);
     height: clamp(130px, 39vw, 166px);
   }
   .arch-note {
-    width: clamp(66px, 20vw, 84px);
-    gap: 2px;
+    width: clamp(64px, 19vw, 78px);
+    gap: 0;
   }
-  .arch-note span { font-size: 9px; }
+  .arch-note--left { left: 12px; }
+  .arch-note--right { right: 12px; }
   .arch-note strong { font-size: 9px; }
-  .arch-note small { font-size: 8px; }
   .arch-browser-bar { height: 28px; }
   .arch-site-headline { font-size: 19px; }
   .arch-site-cards i { height: 22px; }
