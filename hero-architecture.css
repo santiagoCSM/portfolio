@@ -8,7 +8,7 @@
 }
 .hero-layout {
   display: grid;
-  /* Más ancho para la maqueta: las notas respiran a ambos lados. */
+  /* Proporción entre texto y maqueta. */
   grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
   gap: clamp(20px, 3.5vw, 64px);
   align-items: center;
@@ -126,7 +126,7 @@
 }
 .arch-site-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .arch-site-logo { color: #133E39; font: 800 14px var(--font-mono); letter-spacing: -.05em; }
-/* El nombre se escribe dentro del mockup de la capa UI. */
+/* Escritura animada. */
 .arch-site-logo--typing {
   display: inline-block;
   width: 11ch;
@@ -170,8 +170,7 @@
 .arch-layout-wire > div i { height: 68px; border: 1px dashed rgba(54,201,190,.65); border-radius: 6px; }
 .arch-layout-wire > i:last-child { height: 31px; }
 .arch-logic-inner { background-image: radial-gradient(rgba(54,201,190,.14) 1px,transparent 1px); background-size: 16px 16px; }
-/* Engranes SVG vectoriales: dos velocidades con sentido contrario.
-   Se mueven independientemente de las placas 3D, sin JavaScript. */
+/* Engranes con rotación independiente. */
 .arch-gear-train {
   position: relative;
   width: min(210px, 100%);
@@ -237,13 +236,7 @@
 .arch-data-table > div i { border-right: 1px solid rgba(239,228,206,.12); margin: 8px; background: rgba(239,228,206,.20); border-radius: 2px; }
 .arch-data-table > div i:first-child { background: rgba(54,201,190,.38); }
 
-/* Las notas siguen la profundidad proyectada de cada placa:
-   rotateX(58deg) hace que Z se convierta en un desplazamiento vertical
-   aproximado de sin(58deg) × Z. El punto de la línea queda centrado en
-   ese nivel, en lugar de usar porcentajes arbitrarios de la escena. */
-/* Cada llamada se coloca por JS sobre el centro visual de su capa
-   (getBoundingClientRect), incluyendo su movimiento 3D y el tamaño móvil.
-   Los porcentajes son únicamente un respaldo cuando JS está desactivado. */
+/* Alineación dinámica de etiquetas sobre las capas proyectadas. */
 .arch-note {
   --leader-length: 42px;
   position: absolute;
@@ -284,10 +277,7 @@
   0%,100% { transform: translateZ(var(--depth)); }
   50% { transform: translateZ(calc(var(--depth) + 9px)); }
 }
-/* Tablet horizontal y vertical: el layout de dos columnas era demasiado
-   angosto para que las etiquetas respiraran junto al modelo 3D. */
-/* Tablet y móvil: la maqueta 3D se reserva exclusivamente para escritorio.
-   display: none elimina tanto las cuatro capas como sus notas, sin huecos. */
+/* La vista 3D solo se muestra en escritorio. */
 @media (max-width: 1160px) {
   .hero-layout {
     grid-template-columns: minmax(0, 1fr);
