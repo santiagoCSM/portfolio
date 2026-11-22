@@ -170,9 +170,12 @@
 .arch-note {
   --leader-length: clamp(30px, 5vw, 70px);
   --note-depth-y: 0px;
+  --tilt-correction: clamp(16px, 4vw, 40px);
+  --note-side-y: 0px;
   position: absolute;
   z-index: 4;
-  top: calc(51% + var(--note-depth-y) - 21px);
+  /* Corrección lateral por la inclinación de las placas (rotateZ). */
+  top: calc(51% + var(--note-depth-y) + var(--note-side-y) - 21px);
   width: 120px;
   display: flex;
   flex-direction: column;
@@ -198,6 +201,8 @@
   background: var(--bg);
   box-shadow: 0 0 0 3px rgba(54,201,190,.13);
 }
+.arch-note--left { --note-side-y: var(--tilt-correction); }
+.arch-note--right { --note-side-y: calc(0px - var(--tilt-correction)); }
 .arch-note--left::before { left: calc(100% + 7px); }
 .arch-note--right::before { right: calc(100% + 7px); }
 .arch-note--left::after { left: calc(100% + 4px + var(--leader-length)); }
