@@ -163,9 +163,16 @@
 .arch-data-table > div i { border-right: 1px solid rgba(239,228,206,.12); margin: 8px; background: rgba(239,228,206,.20); border-radius: 2px; }
 .arch-data-table > div i:first-child { background: rgba(54,201,190,.38); }
 
+/* Las notas siguen la profundidad proyectada de cada placa:
+   rotateX(58deg) hace que Z se convierta en un desplazamiento vertical
+   aproximado de sin(58deg) × Z. El punto de la línea queda centrado en
+   ese nivel, en lugar de usar porcentajes arbitrarios de la escena. */
 .arch-note {
+  --leader-length: clamp(30px, 5vw, 70px);
+  --note-depth-y: 0px;
   position: absolute;
   z-index: 4;
+  top: calc(51% + var(--note-depth-y) - 21px);
   width: 120px;
   display: flex;
   flex-direction: column;
@@ -177,18 +184,31 @@
   content: "";
   position: absolute;
   top: 21px;
-  width: clamp(30px, 5vw, 76px);
-  border-top: 1px solid rgba(54,201,190,.72);
+  width: var(--leader-length);
+  border-top: 1px solid rgba(54,201,190,.8);
+}
+.arch-note::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: 0 0 0 3px rgba(54,201,190,.13);
 }
 .arch-note--left::before { left: calc(100% + 7px); }
 .arch-note--right::before { right: calc(100% + 7px); }
+.arch-note--left::after { left: calc(100% + 4px + var(--leader-length)); }
+.arch-note--right::after { right: calc(100% + 4px + var(--leader-length)); }
 .arch-note span { font-size: 10px; color: var(--accent); }
 .arch-note strong { font-weight: 500; color: var(--text); font-size: 11px; }
 .arch-note small { color: var(--muted); font-size: 9px; line-height: 1.5; }
-.arch-note--interface { top: 12%; right: 0; }
-.arch-note--components { top: 34%; left: 1%; }
-.arch-note--logic { top: 60%; right: 0; }
-.arch-note--data { top: 79%; left: 2%; }
+.arch-note--interface { --note-depth-y: -126px; right: 0; }
+.arch-note--components { --note-depth-y: -77px; left: 0; }
+.arch-note--logic { --note-depth-y: -30px; right: 0; }
+.arch-note--data { --note-depth-y: 18px; left: 0; }
 
 .arch-caption {
   position: absolute;
@@ -215,8 +235,7 @@
 @media (max-width: 1020px) {
   .hero-layout { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 12px; }
   .hero-copy .hero-title { font-size: clamp(2.45rem,4.4vw,4.1rem); }
-  .arch-note { width: 99px; }
-  .arch-note::before { width: 26px; }
+  .arch-note { width: 99px; --leader-length: 26px; }
 }
 @media (max-width: 800px) {
   .hero { padding-top: calc(74px + 28px); }
@@ -224,22 +243,22 @@
   .hero-copy .hero-title { font-size: clamp(2.9rem, 8vw, 4.6rem); }
   .hero-architecture { height: 520px; max-width: 640px; margin: 8px auto 0; }
   .arch-assembly { width: 300px; height: 240px; }
-  .arch-note { width: 122px; }
-  .arch-note::before { width: 55px; }
+  .arch-note { width: 122px; --leader-length: clamp(34px, 7vw, 55px); }
 }
 @media (max-width: 520px) {
   .hero-architecture { height: 400px; }
   .arch-scene { bottom: 22px; }
   .arch-assembly { width: 244px; height: 192px; }
-  .arch-note { width: 85px; gap: 2px; }
+  .arch-note {
+    width: clamp(76px, 23vw, 88px);
+    --leader-length: clamp(12px, 4.2vw, 20px);
+    gap: 2px;
+  }
   .arch-note span { font-size: 9px; }
   .arch-note strong { font-size: 9px; }
   .arch-note small { font-size: 8px; }
-  .arch-note::before { width: 18px; }
-  .arch-note--components { top: 32%; left: 0; }
-  .arch-note--interface { top: 11%; right: 0; }
-  .arch-note--logic { top: 57%; right: 0; }
-  .arch-note--data { top: 77%; left: 0; }
+  .arch-note--components, .arch-note--data { left: 0; }
+  .arch-note--interface, .arch-note--logic { right: 0; }
   .arch-caption { font-size: 8px; }
   .arch-browser-bar { height: 28px; }
   .arch-site-headline { font-size: 19px; }
