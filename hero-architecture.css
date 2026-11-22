@@ -242,7 +242,7 @@
   --leader-length: 42px;
   position: absolute;
   z-index: 4;
-  width: 120px;
+  width: 170px;
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -264,7 +264,7 @@
 .arch-note--right::before { right: calc(100% + 7px); }
 .arch-note span { font-size: 10px; color: var(--accent); }
 .arch-note strong { font-weight: 500; color: var(--text); font-size: 16px; }
-.arch-note small { color: var(--muted); font-size: 12px; line-height: 1.5; }
+.arch-note small { color: var(--muted); font-size: 12px; line-height: 1.5; white-space: nowrap; }
 .arch-note--interface { top: 18%; right: 0; }
 .arch-note--components { top: 39%; left: 0; }
 .arch-note--logic { top: 57%; right: 0; }
