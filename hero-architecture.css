@@ -63,7 +63,7 @@
   width: clamp(240px, 24vw, 306px);
   height: clamp(190px, 20vw, 248px);
   transform-style: preserve-3d;
-  transform: translate(-50%, -50%) rotateX(58deg) rotateZ(-32deg);
+  transform: translate(-50%, -50%) rotateX(58deg) rotateZ(-32deg) scale3d(.92, .92, .92);
   animation: arch-hover 10s ease-in-out infinite alternate;
 }
 .arch-plate {
@@ -265,14 +265,14 @@
 .arch-note span { font-size: 10px; color: var(--accent); }
 .arch-note strong { font-weight: 500; color: var(--text); font-size: 16px; }
 .arch-note small { color: var(--muted); font-size: 12px; line-height: 1.5; white-space: nowrap; }
-.arch-note--interface { top: 18%; right: 0; }
-.arch-note--components { top: 39%; left: 0; }
-.arch-note--logic { top: 57%; right: 0; }
-.arch-note--data { top: 75%; left: 0; }
+.arch-note--interface { top: 20%; right: 16px; }
+.arch-note--components { top: 40%; left: 16px; }
+.arch-note--logic { top: 56%; right: 16px; }
+.arch-note--data { top: 73%; left: 16px; }
 
 @keyframes arch-hover {
-  from { transform: translate(-50%,-48%) rotateX(57deg) rotateZ(-31deg); }
-  to   { transform: translate(-50%,-54%) rotateX(61deg) rotateZ(-35deg); }
+  from { transform: translate(-50%,-48%) rotateX(57deg) rotateZ(-31deg) scale3d(.92, .92, .92); }
+  to   { transform: translate(-50%,-54%) rotateX(61deg) rotateZ(-35deg) scale3d(.92, .92, .92); }
 }
 @keyframes arch-layer-float {
   0%,100% { transform: translateZ(var(--depth)); }
