@@ -42,6 +42,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=20261122-palette-surf">
+<link rel="stylesheet" href="hero-architecture.css?v=1">
 </head>
 <body>
 
@@ -62,21 +63,96 @@
 <main id="main">
 
   <section class="hero" id="top">
-    <p class="eyebrow reveal"><i class="status-dot"></i> Disponible para trabajo · 2026</p>
-    <h1 class="hero-title reveal">
-      Diseño y construyo<br>
-      <em>productos digitales</em><br>
-      de principio a fin.
-    </h1>
-    <p class="hero-lede reveal">
-      Soy Santiago Cortés, desarrollador web full-stack. Ayudo a negocios
-      y emprendedores a convertir una idea en un producto real: rápido, mantenible y bien hecho.
-    </p>
-    <div class="hero-meta reveal">
-      <a href="#contact" class="text-link">Iniciar un proyecto <span aria-hidden="true">→</span></a>
-      <span class="divider-dot" aria-hidden="true">·</span>
-      <a href="#projects" class="text-link">Ver trabajo</a>
-      <a href="files/Santiago_Cortes_Martinez_Software_Engineer_CV.pdf" class="cv-download" download="Santiago_Cortes_Martinez_Software_Engineer_CV.pdf" type="application/pdf" aria-label="Descargar currículum de Santiago Cortés en PDF">Descargar CV <span aria-hidden="true">↓</span></a>
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <p class="eyebrow reveal"><i class="status-dot"></i> Disponible para trabajo · 2026</p>
+        <h1 class="hero-title reveal">
+          Diseño y construyo<br>
+          <em>productos digitales</em><br>
+          de principio a fin.
+        </h1>
+        <p class="hero-lede reveal">
+          Soy Santiago Cortés, desarrollador web full-stack. Ayudo a negocios
+          y emprendedores a convertir una idea en un producto real: rápido, mantenible y bien hecho.
+        </p>
+        <div class="hero-meta reveal">
+          <a href="#contact" class="text-link">Iniciar un proyecto <span aria-hidden="true">→</span></a>
+          <span class="divider-dot" aria-hidden="true">·</span>
+          <a href="#projects" class="text-link">Ver trabajo</a>
+          <a href="files/Santiago_Cortes_Martinez_Software_Engineer_CV.pdf" class="cv-download" download="Santiago_Cortes_Martinez_Software_Engineer_CV.pdf" type="application/pdf" aria-label="Descargar currículum de Santiago Cortés en PDF">Descargar CV <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+
+      <figure class="hero-architecture" role="img" aria-label="Vista isométrica en movimiento de una página web separada en cuatro niveles: interfaz, componentes, lógica de aplicación y datos.">
+        <div class="arch-scene" aria-hidden="true">
+          <div class="arch-grid"></div>
+          <div class="arch-assembly">
+            <div class="arch-plate arch-plate--data">
+              <div class="arch-data-inner">
+                <span class="arch-mini-label">04 / DATA LAYER</span>
+                <div class="arch-data-table">
+                  <div><i></i><i></i><i></i></div>
+                  <div><i></i><i></i><i></i></div>
+                  <div><i></i><i></i><i></i></div>
+                  <div><i></i><i></i><i></i></div>
+                </div>
+              </div>
+            </div>
+            <div class="arch-plate arch-plate--logic">
+              <div class="arch-logic-inner">
+                <span class="arch-mini-label">03 / APPLICATION</span>
+                <div class="arch-logic-nodes">
+                  <span>STATE</span><span>API</span><span>AUTH</span>
+                </div>
+                <div class="arch-logic-route"></div>
+              </div>
+            </div>
+            <div class="arch-plate arch-plate--layout">
+              <div class="arch-layout-inner">
+                <span class="arch-mini-label">02 / COMPONENT TREE</span>
+                <div class="arch-layout-wire">
+                  <i></i>
+                  <div><i></i><i></i><i></i></div>
+                  <i></i>
+                </div>
+              </div>
+            </div>
+            <div class="arch-plate arch-plate--ui">
+              <div class="arch-ui-browser">
+                <div class="arch-browser-bar">
+                  <i class="arch-browser-dot"></i><i class="arch-browser-dot"></i><i class="arch-browser-dot"></i>
+                  <span class="arch-browser-url">app.local / index</span>
+                </div>
+                <div class="arch-site-nav">
+                  <b class="arch-site-logo">S/</b>
+                  <span class="arch-site-links"><i></i><i></i><i></i></span>
+                </div>
+                <span class="arch-site-eyebrow">BUILT FROM SCRATCH</span>
+                <strong class="arch-site-headline">Ideas, hechas <em>sistema.</em></strong>
+                <div class="arch-site-rows"><i></i><i></i></div>
+                <i class="arch-site-button"></i>
+                <div class="arch-site-cards"><i></i><i></i><i></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="arch-note arch-note--interface arch-note--right">
+            <span>01 / UI</span><strong>Interfaz</strong><small>HTML · CSS · UX</small>
+          </div>
+          <div class="arch-note arch-note--components arch-note--left">
+            <span>02 / VIEW</span><strong>Componentes</strong><small>Diseño modular</small>
+          </div>
+          <div class="arch-note arch-note--logic arch-note--right">
+            <span>03 / API</span><strong>Lógica</strong><small>Servicios · estado</small>
+          </div>
+          <div class="arch-note arch-note--data arch-note--left">
+            <span>04 / DB</span><strong>Datos</strong><small>Modelos · consultas</small>
+          </div>
+        </div>
+        <figcaption class="arch-caption" aria-hidden="true">
+          <span><b>FIG. 01</b> Anatomía de una web</span>
+          <span>CAPAS / VISTA EXPLOTADA</span>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
