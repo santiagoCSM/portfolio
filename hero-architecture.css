@@ -266,9 +266,9 @@
 .arch-note span { font-size: 10px; color: var(--accent); }
 .arch-note strong { font-weight: 500; color: var(--text); font-size: 16px; }
 .arch-note small { color: var(--muted); font-size: 12px; line-height: 1.5; white-space: nowrap; }
-.arch-note--interface { top: 20%; right: -8px; }
+.arch-note--interface { top: 20%; right: -30px; }
 .arch-note--components { top: 40%; left: 16px; }
-.arch-note--logic { top: 56%; right: -8px; }
+.arch-note--logic { top: 56%; right: -30px; }
 .arch-note--data { top: 73%; left: 16px; }
 
 @keyframes arch-hover {
