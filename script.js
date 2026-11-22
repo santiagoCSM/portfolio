@@ -80,8 +80,7 @@ if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-mot
 
 
 /* ---------- Notas que siguen las capas reales de la vista 3D ---------- */
-/* Leemos la caja proyectada de cada capa: así la etiqueta conserva su
-   altura correcta aunque la maqueta flote, gire o cambie de tamaño. */
+/* Alineación de notas con las coordenadas proyectadas de las capas. */
 const archScene = document.querySelector(".arch-scene");
 
 if (archScene) {
@@ -132,7 +131,7 @@ if (archScene) {
     const tick = () => {
       frame = 0;
       if (!isVisible || document.hidden || !desktopScreen.matches) return;
-      // Sin límite artificial de 33 ms: se sincroniza con cada repintado.
+      // Actualización sincronizada con cada fotograma.
       alignNotes();
       if (!reducedMotion.matches) frame = requestAnimationFrame(tick);
     };
@@ -166,7 +165,7 @@ if (archScene) {
       resume();
     });
     desktopScreen.addEventListener("change", () => {
-      // Al entrar en tablet/móvil se cancela el bucle por completo.
+      // Desactiva el seguimiento cuando la maqueta no está visible.
       stop();
       resume();
     });
