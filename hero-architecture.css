@@ -211,39 +211,95 @@
   0%,100% { transform: translateZ(var(--depth)); }
   50% { transform: translateZ(calc(var(--depth) + 9px)); }
 }
-@media (max-width: 1020px) {
-  .hero-layout { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 16px; }
-  .hero-copy .hero-title { font-size: clamp(2.45rem,4.4vw,4.1rem); }
-  .arch-note { width: 99px; --leader-length: 26px; }
+/* Tablet horizontal y vertical: el layout de dos columnas era demasiado
+   angosto para que las etiquetas respiraran junto al modelo 3D. */
+@media (max-width: 1160px) {
+  .hero-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  .hero-copy { max-width: 800px; }
+  .hero-copy .hero-title { font-size: clamp(3.1rem, 6vw, 4.75rem); }
+  .hero-copy .hero-lede { max-width: 60ch; }
+  .hero-architecture {
+    width: 100%;
+    max-width: 820px;
+    height: 540px;
+    margin: 38px auto 0;
+  }
+  .arch-assembly { width: 310px; height: 248px; }
+  .arch-note { width: 122px; }
 }
-@media (max-width: 800px) {
-  .hero { padding-top: calc(74px + 28px); }
-  .hero-layout { grid-template-columns: 1fr; gap: 4px; }
-  .hero-copy .hero-title { font-size: clamp(2.9rem, 8vw, 4.6rem); }
-  .hero-architecture { height: 520px; max-width: 640px; margin: 8px auto 0; }
-  .arch-assembly { width: 300px; height: 240px; }
-  .arch-note { width: 122px; --leader-length: clamp(34px, 7vw, 55px); }
+
+/* Tablet compacta y móvil grande: escenario casi a pantalla completa
+   con un margen seguro para las notas a ambos lados. */
+@media (max-width: 820px) {
+  .hero {
+    padding-top: calc(74px + 28px);
+    padding-bottom: 78px;
+  }
+  .hero-copy .hero-title {
+    font-size: clamp(2.85rem, 7vw, 4.2rem);
+    line-height: 1.08;
+  }
+  .hero-architecture {
+    width: calc(100vw - 32px);
+    max-width: 760px;
+    height: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 24px 0 0;
+  }
+  .arch-assembly {
+    width: clamp(235px, 39vw, 296px);
+    height: clamp(190px, 32vw, 242px);
+  }
+  .arch-note { width: clamp(98px, 15vw, 118px); }
+  .arch-note span { font-size: 10px; }
+  .arch-note strong { font-size: 11px; }
+  .arch-note small { font-size: 9px; }
 }
+
+/* Teléfonos grandes, incluidos 540–680px: espacio más generoso para
+   los textos laterales y una maqueta algo menor para evitar cruces. */
+@media (max-width: 680px) {
+  .hero-copy .hero-title { font-size: clamp(2.55rem, 8vw, 3.75rem); }
+  .hero-copy .hero-lede { font-size: 1.04rem; }
+  .hero-architecture {
+    width: calc(100vw - 16px);
+    height: 460px;
+    margin-top: 16px;
+  }
+  .arch-assembly {
+    width: clamp(208px, 40vw, 260px);
+    height: clamp(166px, 33vw, 210px);
+  }
+  .arch-note {
+    width: clamp(90px, 17vw, 112px);
+    gap: 2px;
+  }
+  .arch-note span { font-size: 9.5px; }
+  .arch-note strong { font-size: 10px; }
+  .arch-note small { font-size: 8.5px; }
+}
+
+/* Teléfonos pequeños: conservar la composición sin desbordamiento lateral. */
 @media (max-width: 520px) {
-  /* En móvil, la escena ocupa también el padding lateral del hero. */
   .hero-architecture {
     height: 400px;
-    width: calc(100% + 2 * clamp(20px, 6vw, 40px));
-    margin-left: calc(-1 * clamp(20px, 6vw, 40px));
-    max-width: none;
+    width: calc(100vw - 12px);
   }
-  /* En pantallas muy angostas dejamos espacio a las notas sin desbordar. */
-  .arch-assembly { width: clamp(160px, 48vw, 205px); height: clamp(130px, 39vw, 166px); }
+  .arch-assembly {
+    width: clamp(160px, 48vw, 205px);
+    height: clamp(130px, 39vw, 166px);
+  }
   .arch-note {
     width: clamp(66px, 20vw, 84px);
-    --leader-length: 18px;
     gap: 2px;
   }
   .arch-note span { font-size: 9px; }
   .arch-note strong { font-size: 9px; }
   .arch-note small { font-size: 8px; }
-  .arch-note--components, .arch-note--data { left: 0; }
-  .arch-note--interface, .arch-note--logic { right: 0; }
   .arch-browser-bar { height: 28px; }
   .arch-site-headline { font-size: 19px; }
   .arch-site-cards i { height: 22px; }
