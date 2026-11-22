@@ -98,6 +98,7 @@ if (archScene) {
 
   if (pairs.length === 4) {
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const desktopScreen = window.matchMedia("(min-width: 1161px)");
     let frame = 0;
     let isVisible = true;
 
@@ -130,14 +131,14 @@ if (archScene) {
 
     const tick = () => {
       frame = 0;
-      if (!isVisible || document.hidden) return;
+      if (!isVisible || document.hidden || !desktopScreen.matches) return;
       // Sin límite artificial de 33 ms: se sincroniza con cada repintado.
       alignNotes();
       if (!reducedMotion.matches) frame = requestAnimationFrame(tick);
     };
 
     const resume = () => {
-      if (!isVisible || document.hidden || frame) return;
+      if (!isVisible || document.hidden || !desktopScreen.matches || frame) return;
       frame = requestAnimationFrame(tick);
     };
 
@@ -160,7 +161,15 @@ if (archScene) {
       if (document.hidden) stop();
       else resume();
     });
-    reducedMotion.addEventListener("change", resume);
+    reducedMotion.addEventListener("change", () => {
+      stop();
+      resume();
+    });
+    desktopScreen.addEventListener("change", () => {
+      // Al entrar en tablet/móvil se cancela el bucle por completo.
+      stop();
+      resume();
+    });
     resume();
   }
 }
