@@ -16,13 +16,15 @@ jobs:
           persist-credentials: true
       - name: Instalar renderizador SVG
         run: sudo apt-get update && sudo apt-get install -y librsvg2-bin
-      - name: Crear PNG social
-        run: rsvg-convert --width 1200 --height 630 --output img/og-cover.png img/og-cover.svg
+      - name: Crear imágenes sociales
+        run: |
+          rsvg-convert --width 1200 --height 630 --output img/og-cover.png img/og-cover.svg
+          rsvg-convert --width 1200 --height 630 --output img/og-cover-v2.png img/og-cover.svg
       - name: Publicar PNG
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add img/og-cover.png
+          git add img/og-cover.png img/og-cover-v2.png
           if ! git diff --cached --quiet; then
             git commit -m "Generar imagen OG 1200x630"
             git push
