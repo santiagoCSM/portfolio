@@ -174,7 +174,7 @@ if (archScene) {
 }
 
 /* ---------- Vistas previas de proyectos ---------- */
-const previewMobile = window.matchMedia("(hover: none), (pointer: coarse)");
+const previewMobile = window.matchMedia("(max-width: 800px), (pointer: coarse)");
 const previewHover = window.matchMedia("(hover: hover) and (pointer: fine)");
 const previewReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -187,17 +187,26 @@ document.querySelectorAll(".work-shot[data-video-preview]").forEach((shot) => {
   let hoverActive = false;
 
   const resetPreview = () => {
-    shot.classList.remove("is-video-playing");
+    shot.classList.remove("is-video-playing", "needs-tap");
     video.pause();
     if (video.readyState > 0 && video.currentTime !== 0) video.currentTime = 0;
   };
 
   const playPreview = () => {
-    if (document.hidden || previewReducedMotion.matches) return;
+    if (document.hidden || (!previewMobile.matches && previewReducedMotion.matches)) return;
+
+    video.muted = true;
+    video.playsInline = true;
     video.loop = false;
+
     const playback = video.play();
     if (playback && typeof playback.catch === "function") {
-      playback.catch(() => shot.classList.remove("is-video-playing"));
+      playback.catch((error) => {
+        if (error.name === "NotAllowedError" &&
+            previewMobile.matches && visibleOnScreen && !document.hidden) {
+          shot.classList.add("needs-tap");
+        }
+      });
     }
   };
 
@@ -205,6 +214,7 @@ document.querySelectorAll(".work-shot[data-video-preview]").forEach((shot) => {
     if ((previewMobile.matches && visibleOnScreen) ||
         (!previewMobile.matches && hoverActive)) {
       shot.classList.add("is-video-playing");
+      shot.classList.remove("needs-tap");
     } else {
       video.pause();
     }
@@ -228,16 +238,23 @@ document.querySelectorAll(".work-shot[data-video-preview]").forEach((shot) => {
     if (!link.contains(event.relatedTarget)) leaveHover();
   });
 
+  link.addEventListener("click", (event) => {
+    if (!previewMobile.matches || !shot.classList.contains("needs-tap")) return;
+    if (event.detail !== 0 && !shot.contains(event.target)) return;
+    event.preventDefault();
+    playPreview();
+  });
+
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(([entry]) => {
-      const visible = entry.isIntersecting && entry.intersectionRatio >= 0.6;
+      const visible = entry.isIntersecting;
       if (visible === visibleOnScreen) return;
 
       visibleOnScreen = visible;
       if (!previewMobile.matches) return;
       if (visible) playPreview();
       else resetPreview();
-    }, { threshold: [0, 0.6, 1] });
+    }, { rootMargin: "-12% 0px -12% 0px", threshold: 0 });
     observer.observe(shot);
   }
 
@@ -246,8 +263,12 @@ document.querySelectorAll(".work-shot[data-video-preview]").forEach((shot) => {
     resetPreview();
     if (previewMobile.matches && visibleOnScreen) playPreview();
   };
+
   previewMobile.addEventListener("change", syncPreview);
-  previewReducedMotion.addEventListener("change", syncPreview);
+  previewReducedMotion.addEventListener("change", () => {
+    if (!previewMobile.matches) syncPreview();
+  });
+
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) resetPreview();
     else if (previewMobile.matches && visibleOnScreen) playPreview();
