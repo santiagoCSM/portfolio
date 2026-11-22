@@ -1,14 +1,15 @@
 /* Portada · arquitectura web en vista explotada.
    Modelo CSS 3D, sin canvas, librerías ni descargas adicionales. */
 .hero {
-  max-width: 1320px;
+  max-width: 1500px;
   width: 100%;
   padding-top: clamp(108px, 12vh, 156px);
   padding-bottom: clamp(74px, 9vh, 112px);
 }
 .hero-layout {
   display: grid;
-  grid-template-columns: minmax(0, .97fr) minmax(0, 1.03fr);
+  /* Más ancho para la maqueta: las notas respiran a ambos lados. */
+  grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
   gap: clamp(20px, 3.5vw, 64px);
   align-items: center;
 }
@@ -211,7 +212,7 @@
   50% { transform: translateZ(calc(var(--depth) + 9px)); }
 }
 @media (max-width: 1020px) {
-  .hero-layout { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 12px; }
+  .hero-layout { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 16px; }
   .hero-copy .hero-title { font-size: clamp(2.45rem,4.4vw,4.1rem); }
   .arch-note { width: 99px; --leader-length: 26px; }
 }
@@ -231,7 +232,8 @@
     margin-left: calc(-1 * clamp(20px, 6vw, 40px));
     max-width: none;
   }
-  .arch-assembly { width: clamp(176px, 54vw, 222px); height: clamp(142px, 43vw, 177px); }
+  /* En pantallas muy angostas dejamos espacio a las notas sin desbordar. */
+  .arch-assembly { width: clamp(160px, 48vw, 205px); height: clamp(130px, 39vw, 166px); }
   .arch-note {
     width: clamp(66px, 20vw, 84px);
     --leader-length: 18px;
