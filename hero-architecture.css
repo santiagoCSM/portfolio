@@ -229,7 +229,7 @@
 }
 @media (max-width: 520px) {
   .hero-architecture { height: 400px; }
-  .arch-scene { inset-bottom: 22px; }
+  .arch-scene { bottom: 22px; }
   .arch-assembly { width: 244px; height: 192px; }
   .arch-note { width: 85px; gap: 2px; }
   .arch-note span { font-size: 9px; }
