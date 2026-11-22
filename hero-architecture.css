@@ -3,6 +3,7 @@
 .hero {
   max-width: none;
   width: 100%;
+  padding-inline: var(--page-gutter);
   padding-top: clamp(108px, 12vh, 156px);
   padding-bottom: clamp(74px, 9vh, 112px);
 }
