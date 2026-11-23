@@ -41,7 +41,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=sections-1200-v10">
+<link rel="stylesheet" href="styles.css?v=project-stories-v11">
 <link rel="stylesheet" href="hero-architecture.css?v=four-gears-v17">
 </head>
 <body>
@@ -252,7 +252,7 @@
 
     <ul class="work-grid">
       <li class="work-card reveal">
-        <a href="https://mayoreo.blife.mx/" target="_blank" rel="noopener">
+        <a href="https://mayoreo.blife.mx/" target="_blank" rel="noopener" data-project="blife-mayoreo">
           <span class="work-shot work-shot--contain" data-video-preview>
             <img src="img/blife-mayoreo-new.png" alt="Captura de B Life Mayorista: portal de mayoreo para distribuidores" loading="lazy" decoding="async" width="1280" height="800">
             <video muted playsinline preload="none" poster="img/blife-mayoreo-new.png" aria-hidden="true">
@@ -267,13 +267,14 @@
             <span class="work-name">B Life Mayorista <i class="work-arrow" aria-hidden="true">↗</i></span>
             <span class="work-desc">Portal de mayoreo para distribuidores de B Life, con registro, catálogo, precios exclusivos y carrito.</span>
             <span class="work-detail"><span class="work-detail-label">Enfoque</span> Desarrollo web e integración de funcionalidades de comercio electrónico.</span>
+            <span class="work-inspect">Leer sobre mi participación →</span>
             <span class="work-skills" aria-label="Áreas del proyecto"><span>E-commerce</span><span>Integraciones</span><span>Full-Stack</span></span>
           </span>
         </a>
       </li>
 
       <li class="work-card reveal">
-        <a href="http://blifesupplements.com/" target="_blank" rel="noopener">
+        <a href="http://blifesupplements.com/" target="_blank" rel="noopener" data-project="blife-supplements">
           <span class="work-shot work-shot--contain" data-video-preview>
             <img src="img/blife-supp.png" alt="Captura actualizada de B Life Supplements: tienda en línea de suplementos naturales" loading="lazy" decoding="async" width="1280" height="677">
             <video muted playsinline preload="none" poster="img/blife-supp.png" aria-hidden="true">
@@ -288,13 +289,14 @@
             <span class="work-name">B Life Supplements <i class="work-arrow" aria-hidden="true">↗</i></span>
             <span class="work-desc">Tienda en línea de B Life con catálogo, búsqueda de productos y carrito de compra.</span>
             <span class="work-detail"><span class="work-detail-label">Enfoque</span> Desarrollo de funcionalidades web para una experiencia de compra clara.</span>
+            <span class="work-inspect">Leer sobre mi participación →</span>
             <span class="work-skills" aria-label="Áreas del proyecto"><span>E-commerce</span><span>Frontend</span><span>Experiencia web</span></span>
           </span>
         </a>
       </li>
 
       <li class="work-card reveal">
-        <a href="https://www.cncmakersolutions.com/" target="_blank" rel="noopener">
+        <a href="https://www.cncmakersolutions.com/" target="_blank" rel="noopener" data-project="cnc-maker">
           <span class="work-shot work-shot--contain" data-video-preview>
             <img src="img/cnc-maker-new.webp" alt="Captura de CNC Maker Solutions: sitio de manufactura de precisión" loading="lazy" decoding="async" width="1582" height="665" onerror="this.onerror=null;this.src='img/cnc-maker.jpg'">
             <video muted playsinline preload="none" poster="img/cnc-maker-new.webp" aria-hidden="true">
@@ -309,13 +311,14 @@
             <span class="work-name">CNC Maker Solutions <i class="work-arrow" aria-hidden="true">↗</i></span>
             <span class="work-desc">Sitio corporativo para servicios de maquinado CNC, láser e impresión 3D.</span>
             <span class="work-detail"><span class="work-detail-label">Enfoque</span> Presentación de servicios, animaciones y recorrido de cotización.</span>
+            <span class="work-inspect">Leer sobre mi participación →</span>
             <span class="work-skills" aria-label="Áreas del proyecto"><span>Sitio corporativo</span><span>Animaciones</span><span>Cotización</span></span>
           </span>
         </a>
       </li>
 
       <li class="work-card reveal">
-        <a href="https://santiagoCSM.github.io/priors/" target="_blank" rel="noopener">
+        <a href="https://santiagoCSM.github.io/priors/" target="_blank" rel="noopener" data-project="priors">
           <span class="work-shot work-shot--contain" data-video-preview>
             <img src="img/priors-new-back.webp" alt="Captura de Priors: plataforma de investigación cuantitativa" loading="lazy" decoding="async" width="1582" height="632" onerror="this.onerror=null;this.src='img/priors-background.png'">
             <video muted playsinline preload="none" poster="img/priors-new-back.webp" aria-hidden="true">
@@ -330,6 +333,7 @@
             <span class="work-name">Priors <i class="work-arrow" aria-hidden="true">↗</i></span>
             <span class="work-desc">Proyecto propio de investigación cuantitativa para definir hipótesis y criterios de éxito antes de publicar resultados.</span>
             <span class="work-detail"><span class="work-detail-label">Enfoque</span> Diseño de un proceso transparente de investigación y evaluación.</span>
+            <span class="work-inspect">Leer sobre mi participación →</span>
             <span class="work-skills" aria-label="Áreas del proyecto"><span>Proyecto propio</span><span>Investigación</span><span>Visualización</span></span>
           </span>
         </a>
@@ -370,12 +374,44 @@
 
 </main>
 
+<!-- Subpágina editorial de proyectos; fuera del contenido principal para conservar el foco. -->
+<div class="project-page-backdrop" id="projectPageBackdrop" aria-hidden="true"></div>
+<aside class="project-page" id="projectPage" role="dialog" aria-modal="true" aria-labelledby="projectPageTitle" aria-hidden="true" inert>
+  <header class="project-page-toolbar">
+    <button class="project-page-back" type="button" data-project-close aria-label="Volver al portafolio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      Volver
+    </button>
+    <span class="project-page-toolbar-label">Trabajo seleccionado / <span id="projectPageNumber"></span></span>
+    <button class="project-page-close" type="button" data-project-close aria-label="Cerrar detalle del proyecto">
+      Cerrar
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"/></svg>
+    </button>
+  </header>
+  <div class="project-page-scroll" id="projectPageScroll">
+    <figure class="project-page-cover">
+      <img class="project-page-cover-fill" id="projectPageCoverFill" alt="" aria-hidden="true">
+      <img class="project-page-cover-image" id="projectPageCover" alt="">
+    </figure>
+    <article class="project-page-content">
+      <p class="project-page-eyebrow" id="projectPageCategory"></p>
+      <h2 class="project-page-title" id="projectPageTitle"></h2>
+      <p class="project-page-introduction" id="projectPageIntroduction"></p>
+      <div id="projectPageSections"></div>
+      <div class="project-page-tags" id="projectPageTags" aria-label="Áreas y herramientas"></div>
+      <nav class="project-page-links" id="projectPageLinks" aria-label="Enlaces del proyecto"></nav>
+    </article>
+  </div>
+</aside>
+
+
 <footer class="site-footer">
   <span>&copy; 2026 Santiago C.</span>
   <span>Desarrollado con HTML, CSS y JavaScript</span>
 </footer>
 
 <script src="script.js?v=mobile-autoplay-fix-v3"></script>
+<script src="project-pages.js?v=project-stories-v1" defer></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bf9a6895f8c64769b704a5f61e6aa796"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
