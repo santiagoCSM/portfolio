@@ -120,6 +120,8 @@
   const pageIntroduction = document.getElementById("projectPageIntroduction");
   const pageCover = document.getElementById("projectPageCover");
   const pageCoverFill = document.getElementById("projectPageCoverFill");
+  const pageCoverLink = document.getElementById("projectPageCoverLink");
+  const pageVisit = document.getElementById("projectPageVisit");
   const pageSections = document.getElementById("projectPageSections");
   const pageTags = document.getElementById("projectPageTags");
   const pageLinks = document.getElementById("projectPageLinks");
@@ -149,6 +151,13 @@
     pageCover.alt = project.imageAlt;
     pageCoverFill.src = project.image;
     pageCoverFill.alt = "";
+    // Ambas entradas llevan al destino principal del proyecto.
+    const destination = project.links[0];
+    pageVisit.href = destination.href;
+    pageVisit.textContent = "Visitar sitio ↗";
+    pageVisit.setAttribute("aria-label", "Visitar " + project.title + " (abre en una pestaña nueva)");
+    pageCoverLink.href = destination.href;
+    pageCoverLink.setAttribute("aria-label", "Visitar " + project.title + " (abre en una pestaña nueva)");
 
     const sections = document.createDocumentFragment();
     project.sections.forEach((item) => {
@@ -166,7 +175,8 @@
     pageTags.replaceChildren(tags);
 
     const links = document.createDocumentFragment();
-    project.links.forEach((item) => {
+    // El enlace principal se muestra arriba; al final solo quedan enlaces secundarios.
+    project.links.slice(1).forEach((item) => {
       const link = textElement("a", "project-page-link", item.label + " ↗");
       link.href = item.href;
       link.target = "_blank";
@@ -174,6 +184,7 @@
       links.append(link);
     });
     pageLinks.replaceChildren(links);
+    pageLinks.hidden = project.links.length <= 1;
     document.title = project.title + " — Santiago Cortés";
   }
 
