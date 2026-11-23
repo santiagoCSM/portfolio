@@ -185,34 +185,45 @@ document.querySelectorAll(".work-shot[data-video-preview]").forEach((shot) => {
 
   let visibleOnScreen = false;
   let hoverActive = false;
+  let requestedByTap = false;
 
+  // El video y su poster permanecen visibles aunque Safari bloquee el autoplay.
+  // La imagen original queda por debajo como respaldo ante errores de carga.
   const resetPreview = () => {
+    requestedByTap = false;
     shot.classList.remove("is-video-playing", "needs-tap");
     video.pause();
     if (video.readyState > 0 && video.currentTime !== 0) video.currentTime = 0;
   };
 
-  const playPreview = () => {
-    if (document.hidden || (!previewMobile.matches && previewReducedMotion.matches)) return;
+  const playPreview = (fromGesture = false) => {
+    if (document.hidden || shot.classList.contains("video-unavailable") ||
+        (previewReducedMotion.matches && !fromGesture)) return;
 
+    if (fromGesture) requestedByTap = true;
     video.muted = true;
     video.playsInline = true;
     video.loop = false;
+    if (video.ended) video.currentTime = 0;
 
-    const playback = video.play();
-    if (playback && typeof playback.catch === "function") {
-      playback.catch((error) => {
-        if (error.name === "NotAllowedError" &&
-            previewMobile.matches && visibleOnScreen && !document.hidden &&
-            !link.hasAttribute("data-project")) {
+    try {
+      const playback = video.play();
+      if (playback && typeof playback.catch === "function") {
+        playback.catch(() => {
+          // iOS puede requerir interacción: el poster y el indicador ▶ siguen visibles.
+          shot.classList.remove("is-video-playing");
           shot.classList.add("needs-tap");
-        }
-      });
+        });
+      }
+    } catch {
+      shot.classList.add("video-unavailable");
+      shot.classList.remove("is-video-playing");
     }
   };
 
   video.addEventListener("playing", () => {
-    if ((previewMobile.matches && visibleOnScreen) ||
+    if (requestedByTap ||
+        (previewMobile.matches && visibleOnScreen) ||
         (!previewMobile.matches && hoverActive)) {
       shot.classList.add("is-video-playing");
       shot.classList.remove("needs-tap");
@@ -220,7 +231,12 @@ document.querySelectorAll(".work-shot[data-video-preview]").forEach((shot) => {
       video.pause();
     }
   });
-  video.addEventListener("error", resetPreview);
+  video.addEventListener("pause", () => shot.classList.remove("is-video-playing"));
+  video.addEventListener("ended", () => shot.classList.remove("is-video-playing"));
+  video.addEventListener("error", () => {
+    resetPreview();
+    shot.classList.add("video-unavailable");
+  });
 
   const enterHover = () => {
     if (previewMobile.matches || !previewHover.matches || hoverActive) return;
@@ -240,19 +256,25 @@ document.querySelectorAll(".work-shot[data-video-preview]").forEach((shot) => {
   });
 
   link.addEventListener("click", (event) => {
-    // Los proyectos abren su subpágina con el primer toque, incluso si el video no puede reproducirse.
-    if (link.hasAttribute("data-project")) return;
-    if (!previewMobile.matches || !shot.classList.contains("needs-tap")) return;
-    if (event.detail !== 0 && !shot.contains(event.target)) return;
+    // Teclado y clics modificados abren el enlace de manera normal.
+    if (event.defaultPrevented || event.detail === 0 || event.button !== 0 ||
+        event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    // Fuera del video (título, descripción, etiquetas), se abre la subpágina.
+    if (!shot.contains(event.target) || shot.classList.contains("video-unavailable")) return;
+
+    const playing = !video.paused && !video.ended && shot.classList.contains("is-video-playing");
+    if (playing) return; // Con el video reproduciéndose, un toque abre la subpágina.
+
+    // Video pausado o bloqueado en iOS: el primer toque solo intenta reproducir.
+    // Se ejecuta directamente en el evento para conservar el gesto de usuario.
     event.preventDefault();
-    playPreview();
+    playPreview(true);
   });
 
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(([entry]) => {
       const visible = entry.isIntersecting;
       if (visible === visibleOnScreen) return;
-
       visibleOnScreen = visible;
       if (!previewMobile.matches) return;
       if (visible) playPreview();
@@ -268,9 +290,7 @@ document.querySelectorAll(".work-shot[data-video-preview]").forEach((shot) => {
   };
 
   previewMobile.addEventListener("change", syncPreview);
-  previewReducedMotion.addEventListener("change", () => {
-    if (!previewMobile.matches) syncPreview();
-  });
+  previewReducedMotion.addEventListener("change", syncPreview);
 
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) resetPreview();
