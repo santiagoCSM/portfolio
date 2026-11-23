@@ -203,7 +203,8 @@ document.querySelectorAll(".work-shot[data-video-preview]").forEach((shot) => {
     if (playback && typeof playback.catch === "function") {
       playback.catch((error) => {
         if (error.name === "NotAllowedError" &&
-            previewMobile.matches && visibleOnScreen && !document.hidden) {
+            previewMobile.matches && visibleOnScreen && !document.hidden &&
+            !link.hasAttribute("data-project")) {
           shot.classList.add("needs-tap");
         }
       });
@@ -239,6 +240,8 @@ document.querySelectorAll(".work-shot[data-video-preview]").forEach((shot) => {
   });
 
   link.addEventListener("click", (event) => {
+    // Los proyectos abren su subpágina con el primer toque, incluso si el video no puede reproducirse.
+    if (link.hasAttribute("data-project")) return;
     if (!previewMobile.matches || !shot.classList.contains("needs-tap")) return;
     if (event.detail !== 0 && !shot.contains(event.target)) return;
     event.preventDefault();
