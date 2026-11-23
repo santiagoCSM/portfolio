@@ -41,7 +41,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=project-stories-v11">
+<link rel="stylesheet" href="styles.css?v=project-visit-video-v12">
 <link rel="stylesheet" href="hero-architecture.css?v=four-gears-v17">
 </head>
 <body>
@@ -383,16 +383,19 @@
       Volver
     </button>
     <span class="project-page-toolbar-label">Trabajo seleccionado / <span id="projectPageNumber"></span></span>
-    <button class="project-page-close" type="button" data-project-close aria-label="Cerrar detalle del proyecto">
-      Cerrar
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"/></svg>
-    </button>
+    <div class="project-page-toolbar-actions">
+      <a class="project-page-visit" id="projectPageVisit" href="#" target="_blank" rel="noopener noreferrer">Visitar sitio ↗</a>
+      <button class="project-page-close" type="button" data-project-close aria-label="Cerrar detalle del proyecto">
+        <span class="project-page-close-label">Cerrar</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"/></svg>
+      </button>
+    </div>
   </header>
   <div class="project-page-scroll" id="projectPageScroll">
-    <figure class="project-page-cover">
+    <a class="project-page-cover" id="projectPageCoverLink" href="#" target="_blank" rel="noopener noreferrer" aria-label="Visitar sitio del proyecto">
       <img class="project-page-cover-fill" id="projectPageCoverFill" alt="" aria-hidden="true">
       <img class="project-page-cover-image" id="projectPageCover" alt="">
-    </figure>
+    </a>
     <article class="project-page-content">
       <p class="project-page-eyebrow" id="projectPageCategory"></p>
       <h2 class="project-page-title" id="projectPageTitle"></h2>
@@ -410,8 +413,8 @@
   <span>Desarrollado con HTML, CSS y JavaScript</span>
 </footer>
 
-<script src="script.js?v=project-preview-link-v4"></script>
-<script src="project-pages.js?v=project-stories-v1" defer></script>
+<script src="script.js?v=video-tap-play-v5"></script>
+<script src="project-pages.js?v=visit-top-cover-v2" defer></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bf9a6895f8c64769b704a5f61e6aa796"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
