@@ -358,24 +358,34 @@ section {
   height: 100%;
   object-fit: contain;
   background: var(--bg-soft);
-  opacity: 0;
+  opacity: 1;
   pointer-events: none;
   transition: opacity .3s ease;
 }
-.work-shot[data-video-preview].is-video-playing video { opacity: 1; }
-.work-shot[data-video-preview].is-video-playing img { opacity: 0; }
-.work-shot[data-video-preview].needs-tap::before {
-  content: "▶ Tocar para reproducir";
+/* Mostrar el propio video y su poster en iOS, aunque aún no se reproduzca. */
+.work-shot[data-video-preview] img { opacity: 0; }
+.work-shot[data-video-preview].video-unavailable video { opacity: 0; }
+.work-shot[data-video-preview].video-unavailable img { opacity: 1; }
+/* El primer toque en la vista previa detenida reproduce; el icono no captura el clic. */
+.work-shot[data-video-preview]:not(.is-video-playing):not(.video-unavailable)::before {
+  content: "▶";
   position: absolute;
-  right: 12px;
-  bottom: 12px;
-  z-index: 2;
-  padding: 8px 11px;
-  border-radius: 6px;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(239, 228, 206, .35);
+  border-radius: 50%;
+  background: rgba(10, 10, 11, .65);
   color: var(--text);
-  background: rgba(10, 10, 11, 0.88);
-  font: 0.72rem var(--font-mono);
+  font: 18px var(--font-body);
+  padding-left: 3px;
+  transform: translate(-50%, -50%);
   pointer-events: none;
+  backdrop-filter: blur(6px);
 }
 @media (prefers-reduced-motion: reduce) {
   .work-shot[data-video-preview] video { transition: none; }
@@ -670,6 +680,23 @@ body.project-page-open { overflow: hidden; }
   white-space: nowrap;
 }
 .project-page-toolbar-label span { color: var(--accent); }
+.project-page-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.5vw, 28px);
+}
+.project-page-visit {
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent);
+  font: 500 .75rem var(--font-mono);
+  white-space: nowrap;
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s ease, color .2s ease;
+}
+.project-page-visit:hover,
+.project-page-visit:focus-visible { border-bottom-color: var(--accent); }
 .project-page-scroll {
   flex: 1;
   min-height: 0;
@@ -684,10 +711,13 @@ body.project-page-open { overflow: hidden; }
   height: 25dvh;
   min-height: 160px;
   margin: 0;
+  display: block;
   overflow: hidden;
   background: var(--bg-soft);
   border-bottom: 1px solid var(--line-soft);
+  cursor: pointer;
 }
+.project-page-cover:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
 .project-page-cover-fill,
 .project-page-cover-image {
   position: absolute;
@@ -788,6 +818,7 @@ body.project-page-open { overflow: hidden; }
   transition: color .2s ease, border-color .2s ease;
 }
 .project-page-link:hover { color: var(--text); border-color: var(--text); }
+.project-page-links[hidden] { display: none; }
 .work-inspect {
   display: inline-flex;
   margin-top: 16px;
@@ -802,6 +833,8 @@ body.project-page-open { overflow: hidden; }
   .project-page { width: 100%; border-left: 0; }
   .project-page-toolbar { min-height: 60px; }
   .project-page-toolbar-label { display: none; }
+  .project-page-close-label { display: none; }
+  .project-page-toolbar-actions { gap: 17px; }
   .project-page-section { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; }
   .project-page-content { width: min(100% - 40px, 680px); padding-bottom: 72px; }
   .project-page-introduction { margin-bottom: 34px; }
