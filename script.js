@@ -73,7 +73,6 @@ if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-mot
     },
     { threshold: 0.14, rootMargin: "0px 0px -40px 0px" }
   );
-  // Solo ocultar elementos cuando el observador esté listo.
   document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
   document.documentElement.classList.add("js");
 }
@@ -105,8 +104,6 @@ if (archScene) {
       const sceneRect = archScene.getBoundingClientRect();
       if (!sceneRect.width || !sceneRect.height) return;
 
-      // Primero medimos todo; después escribimos únicamente transformaciones.
-      // Así no forzamos un recálculo del layout en cada fotograma.
       const positions = pairs.map(({ plate, note, side }) => {
         const plateRect = plate.getBoundingClientRect();
         const noteHeight = note.offsetHeight;
@@ -121,8 +118,6 @@ if (archScene) {
       });
 
       positions.forEach(({ note, translateY, leader }) => {
-        // Las transformaciones son compositadas por el navegador y evitan
-        // mover el elemento con 'top', que repinta/recalcula el diseño.
         note.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0)`;
         note.style.setProperty("--leader-length", `${leader.toFixed(2)}px`);
       });
@@ -131,7 +126,6 @@ if (archScene) {
     const tick = () => {
       frame = 0;
       if (!isVisible || document.hidden || !desktopScreen.matches) return;
-      // Actualización sincronizada con cada fotograma.
       alignNotes();
       if (!reducedMotion.matches) frame = requestAnimationFrame(tick);
     };
@@ -165,7 +159,6 @@ if (archScene) {
       resume();
     });
     desktopScreen.addEventListener("change", () => {
-      // Desactiva el seguimiento cuando la maqueta no está visible.
       stop();
       resume();
     });
@@ -188,7 +181,6 @@ document.querySelectorAll(".work-shot[data-video-preview]").forEach((shot) => {
   let requestedByTap = false;
 
   // El video y su poster permanecen visibles aunque Safari bloquee el autoplay.
-  // La imagen original queda por debajo como respaldo ante errores de carga.
   const resetPreview = () => {
     requestedByTap = false;
     shot.classList.remove("is-video-playing", "needs-tap");
